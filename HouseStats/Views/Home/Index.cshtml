@@ -1,0 +1,109 @@
+﻿@model HouseDataFacade.HouseData
+<!DOCTYPE html>
+<html>
+<style>
+    .gridStyle {
+        border: 1px solid rgb(212,212,212);
+        height: 350px;
+    }
+#accordion .ui-accordion-header {
+  background-color: blueviolet;
+  margin: 0px;
+}
+
+#accordion .ui-accordion-header a {
+  color: red;
+  line-height: 42px;
+  display: block;
+  font-size: 12pt;
+  width: 100%;
+  text-indent: 10px;
+}
+</style>
+<body ng-app="HouseStats">
+    <div ng-controller="HouseStartController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        <div id="accordion">
+            <div class="group">
+                <h2>Source Data</h2>
+                <div>
+                    <div class="gridStyle" ng-grid="gridOptions"></div>
+
+                </div>
+
+            </div>
+
+            <div class="group">
+                <h2>Sort By Distance</h2>
+                <div>
+
+                    <div class="gridStyle" ng-grid="sortDistance"></div>
+
+
+                </div>
+            </div>
+
+            <div class="group">
+                <h2>Sort By Rooms</h2>
+                <div>
+                    @*<div ng-controller="HouseStartController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">*@
+
+                    <div class="gridStyle" ng-grid="sortRooms"></div>
+
+                    @*--</div>*@
+                </div>
+            </div>
+
+            <div class="group">
+                <h2>Sort By Street</h2>
+                <div>
+                    @*<div ng-controller="HouseStartController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">*@
+
+                    <div class="gridStyle" ng-grid="sortStreet"></div>
+
+                    @*</div>*@
+                </div>
+            </div>
+
+            <div class="group">
+                <h2>Nearest Home</h2>
+                <div>
+                    <table>
+                        <tr><td>Street:</td><td>{{houseinfo.NearestHouse.Street}}</td></tr>
+                        <tr><td>Rooms:</td><td>{{houseinfo.NearestHouse.Rooms}}</td></tr>
+                        <tr><td>Value:</td><td>{{houseinfo.NearestHouse.Value}}</td></tr>
+                        <tr><td>Lat:</td><td>{{houseinfo.NearestHouse.Lat}}</td></tr>
+                        <tr><td>Lon:</td><td>{{houseinfo.NearestHouse.Lon}}</td></tr>
+                        <tr><td>Distance:</td><td>{{houseinfo.NearestHouse.Distance}}</td></tr>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.js"></script>
+    @Scripts.Render("~/bundles/HouseStats")
+</body>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#accordion")
+        .accordion({
+            header: "> div > h2"
+        });
+    });
+</script>
+</html>
